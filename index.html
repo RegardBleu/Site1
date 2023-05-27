@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="RegardBleu">
+    <meta name="description" content="project Z">
+    <title> First web page</title>
+    <link rel="icon" href="html5.png" type="image/x-icon">
+    <link rel="stylesheet" href="main.css" type="text/css">
+
+</head>
+
+<body>
+    <h1>Page d'accueil</h1>
+  
+    <div id="userInfo"></div>
+  
+    <form id="loginForm">
+      <div>
+        <label for="username">User:</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div>
+        <label for="password">password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div>
+        <button type="submit">login</button>
+      </div>
+    </form>
+  
+    <script>
+      document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêche la soumission du formulaire
+  
+        // Récupère les valeurs du formulaire
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+  
+        // Vérification des informations de connexion (pour l'exemple)
+        var user = users.find(function(user) {
+          return user.username === username && user.password === password;
+        });
+  
+        if (user) {
+          if (user.role === 'admin') {
+            // Redirection vers la page d'accueil de l'administrateur
+            window.location.href = 'accueil_admin.html';
+          } else if (user.role === 'user') {
+            // Redirection vers la page d'accueil de l'utilisateur
+            window.location.href = 'accueil_user.html';
+          }
+        } else {
+          alert('incorrect!');
+        }
+      });
+  
+      // Code pour afficher les informations de l'utilisateur sur la page d'accueil
+      var user = users.find(function(user) {
+        return user.username === 'admin'; // Remplacez 'admin' par le nom d'utilisateur réel
+      });
+  
+      if (user) {
+        var userInfo = document.getElementById('userInfo');
+        userInfo.innerHTML = 'Nom d\'utilisateur : ' + user.username + '<br>' + 'Rôle : ' + user.role;
+      }
+    </script>
+  </body>
+
+</html>
